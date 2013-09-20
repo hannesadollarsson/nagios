@@ -36,7 +36,7 @@ max_mask = max_data[0]
 max_value = max_data[1]
 used_mask = used_data[0]
 used_value = used_data[1]
-warning_threshold = float(CRITICAL) / 100
+warning_threshold = float(WARNING) / 100
 critical_threshold = float(CRITICAL) / 100
 
 used_percent_mask = float(used_mask) / float(max_mask)
@@ -57,5 +57,5 @@ elif used_percent_value >= warning_threshold:
 	print "WARNING - Unicast mac address value tcam utilization is above " + WARNING + " percent!"
 	sys.exit(1)
 else:
-	print "OK - Unicast mac address tcam utilization is below defined threhsolds"
+	print "OK - Unicast mac address tcam utilization is below defined thresholds"
 	sys.exit(0)
