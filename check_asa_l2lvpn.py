@@ -52,7 +52,7 @@ if PEER in UPTUNNELS[0]:
 	print "OK - VPN tunnel " + PEER + " is up"
 	# Return result "OK" to Nagios
 	sys.exit(0)
-#else:
+else:
 	print "CRITICAL - VPN tunnel " + PEER + " is down"
 	# Return result "Critical" to Nagios
 	sys.exit(2)
