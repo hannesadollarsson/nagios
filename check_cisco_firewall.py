@@ -44,7 +44,7 @@ def get_secondary_state_snmp(IP, VERSION, COMMUNITY):
 
 if VERSION == "3":
     COMMUNITY = COMMUNITY.split(':')
-    USN = COMMUNTIY[0]
+    USN = COMMUNITY[0]
     AUTHPROT = COMMUNITY[1]
     AUTHPASS = COMMUNITY[2]
     PRIVPROT = COMMUNITY[3]
