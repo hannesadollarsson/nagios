@@ -14,30 +14,30 @@ HOST = args.host
 VERSION = args.version
 COMMUNITY = args.community
 
-def get_primary_state_snmpv3(IP, USN, AUTHPROT, AUTHPASS, PRIVPROT, PRIVPASS, AUTHLEV):
+def get_primary_state_snmpv3(HOST, USN, AUTHPROT, AUTHPASS, PRIVPROT, PRIVPASS, AUTHLEV):
     primary_status = " 1.3.6.1.4.1.9.9.147.1.2.1.1.1.3.6"
-    cli_cmd = "/usr/bin/snmpwalk -v 3" + " -a " + AUTHPROT + " -A " + AUTHPASS + " -x " + PRIVPROT + " -X " + PRIVPASS + " -u " + USN + " -l " + AUTHLEV + " " + IP + primary_status
+    cli_cmd = "/usr/bin/snmpwalk -v 3" + " -a " + AUTHPROT + " -A " + AUTHPASS + " -x " + PRIVPROT + " -X " + PRIVPASS + " -u " + USN + " -l " + AUTHLEV + " " + HOST + primary_status
     process = subprocess.Popen(cli_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     output = process.communicate()
     return output
 
-def get_secondary_state_snmpv3(IP, USN, AUTHPROT, AUTHPASS, PRIVPROT, PRIVPASS, AUTHLEV):
+def get_secondary_state_snmpv3(HOST, USN, AUTHPROT, AUTHPASS, PRIVPROT, PRIVPASS, AUTHLEV):
     secondary_status = " 1.3.6.1.4.1.9.9.147.1.2.1.1.1.3.7"
-    cli_cmd = "/usr/bin/snmpwalk -v 3" + " -a " + AUTHPROT + " -A " + AUTHPASS + " -x " + PRIVPROT + " -X " + PRIVPASS + " -u " + USN + " -l " + AUTHLEV + " " + IP + secondary_status
+    cli_cmd = "/usr/bin/snmpwalk -v 3" + " -a " + AUTHPROT + " -A " + AUTHPASS + " -x " + PRIVPROT + " -X " + PRIVPASS + " -u " + USN + " -l " + AUTHLEV + " " + HOST + secondary_status
     process = subprocess.Popen(cli_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     output = process.communicate()
     return output
 
-def get_primary_state_snmp(IP, VERSION, COMMUNITY):
+def get_primary_state_snmp(HOST, VERSION, COMMUNITY):
     primary_status = " 1.3.6.1.4.1.9.9.147.1.2.1.1.1.3.6"
-    cli_cmd = "/usr/bin/snmpwalk -v " + VERSION + " -c " + COMMUNITY + " " + IP + primary_status
+    cli_cmd = "/usr/bin/snmpwalk -v " + VERSION + " -c " + COMMUNITY + " " + HOST + primary_status
     process = subprocess.Popen(cli_cmd, stdout=subprocess.PIPE,stderr=subprocess.PIPE, shell=True)
     output = process.communicate()
     return output
 
-def get_secondary_state_snmp(IP, VERSION, COMMUNITY):
+def get_secondary_state_snmp(HOST, VERSION, COMMUNITY):
     secondary_status = " 1.3.6.1.4.1.9.9.147.1.2.1.1.1.3.7"
-    cli_cmd = "/usr/bin/snmpwalk -v " + VERSION + " -c " + COMMUNITY + " " + IP + secondary_status
+    cli_cmd = "/usr/bin/snmpwalk -v " + VERSION + " -c " + COMMUNITY + " " + HOST + secondary_status
     process = subprocess.Popen(cli_cmd, stdout=subprocess.PIPE,stderr=subprocess.PIPE, shell=True)
     output = process.communicate()
     return output
@@ -51,12 +51,12 @@ if VERSION == "3":
     PRIVPASS = COMMUNITY[4]
     AUTHLEV = COMMUNITY[5]
 
-    PRIMARY_STATE = get_primary_state_snmpv3(IP, USN, AUTHPROT, AUTHPASS, PRIVPROT, PRIVPASS, AUTHLEV)
-    SECONDARY_STATE = get_secondary_state_snmpv3(IP, USN, AUTHPROT, AUTHPASS, PRIVPROT, PRIVPASS, AUTHLEV)
+    PRIMARY_STATE = get_primary_state_snmpv3(HOST, USN, AUTHPROT, AUTHPASS, PRIVPROT, PRIVPASS, AUTHLEV)
+    SECONDARY_STATE = get_secondary_state_snmpv3(HOST, USN, AUTHPROT, AUTHPASS, PRIVPROT, PRIVPASS, AUTHLEV)
 
 elif VERSION == "2" or VERSION == "1":
-    PRIMARY_STATE = get_primary_state_snmp(IP, VERSION, COMMUNITY)
-    SECONDARY_STATE = get_secondary_state_snmp(IP, VERSION, COMMUNITY)
+    PRIMARY_STATE = get_primary_state_snmp(HOST, VERSION, COMMUNITY)
+    SECONDARY_STATE = get_secondary_state_snmp(HOST, VERSION, COMMUNITY)
 else:
     sys.exit("Invalid version, use 1, 2 or 3")
 
