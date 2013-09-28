@@ -61,10 +61,10 @@ else:
     sys.exit("Invalid version, use 1, 2 or 3")
 
 # We only want the real return value
-#PRIMARY_STATE = PRIMARY_STATE.split(':')
-#SECONDARY_STATE = PRIMARY_STATE.split(':')
-print PRIMARY_STATE
-print SECONDARY_STATE
+PRIMARY_STATE = str(PRIMARY_STATE)
+SECONDARY_STATE = str(PRIMARY_STATE)
+PRIMARY_STATE = PRIMARY_STATE[0].split(':')
+SECONDARY_STATE = PRIMARY_STATE[0].split(':')
 
 if PRIMARY_STATE[1] == "9" and SECONDARY_STATE[1] == "10":
     active_nodes = "2"
