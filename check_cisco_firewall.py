@@ -60,7 +60,7 @@ elif VERSION == "2" or VERSION == "1":
 else:
     sys.exit("Invalid version, use 1, 2 or 3")
     
-print PRIMARY_STATE(0)    
+print PRIMARY_STATE[0]    
 
 if PRIMARY_STATE[1] == "9" and SECONDARY_STATE[1] == "10":
     active_nodes = "2"
