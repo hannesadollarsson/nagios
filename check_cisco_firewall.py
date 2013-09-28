@@ -60,23 +60,27 @@ elif VERSION == "2" or VERSION == "1":
 else:
     sys.exit("Invalid version, use 1, 2 or 3")
 
-if PRIMARY_STATE == "9" and SECONDARY_STATE == "10":
+# We only want the real return value
+PRIMARY_STATE = PRIMARY_STATE.split(':')
+SECONDARY_STATE = PRIMARY_STATE.split(':')
+
+if PRIMARY_STATE[1] == "9" and SECONDARY_STATE[1] == "10":
     active_nodes = "2"
     print "OK - Primary is ACTIVE and secondary is STANDBY. " + active_nodes + " active nodes"
     sys.exit(0)
-elif PRIMARY_STATE == "10" and SECONDARY_STATE == "9":
+elif PRIMARY_STATE[1] == "10" and SECONDARY_STATE[1] == "9":
     active_nodes = "2"
     print "WARNING - Primary is STANDBY and secondary is ACTIVE. " + active_nodes + " active nodes"
     sys.exit(1)
-elif PRIMARY_STATE == "9" and SECONDARY_STATE == "4":
+elif PRIMARY_STATE[1] == "9" and SECONDARY_STATE[1] == "4":
     active_nodes = "1"
     print "WARNING - Primary is up and secondary is ERROR. " + active_nodes + " active node"
     sys.exit(1)
-elif PRIMARY_STATE == "4" and SECONDARY_STATE == "9":
+elif PRIMARY_STATE[1] == "4" and SECONDARY_STATE[1] == "9":
     active_nodes = "1"
     print "CIRITICAL - Primary is ERROR and secondary is ACTIVE. " + active_nodes + " active node"
     sys.exit(2)
-elif PRIMARY_STATE == "3" or SECONDARY_STATE == "3":
+elif PRIMARY_STATE[1] == "3" or SECONDARY_STATE[1] == "3":
     active_nodes = "1"
     print "CRITICAL - Primary or secondary is DOWN. " + active_nodes + " active node"
     sys.exit(2)
