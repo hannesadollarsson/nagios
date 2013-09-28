@@ -59,12 +59,8 @@ elif VERSION == "2" or VERSION == "1":
     SECONDARY_STATE = get_secondary_state_snmp(HOST, VERSION, COMMUNITY)
 else:
     sys.exit("Invalid version, use 1, 2 or 3")
-
-# We only want the real return value
-PRIMARY_STATE = str(PRIMARY_STATE)
-SECONDARY_STATE = str(PRIMARY_STATE)
-PRIMARY_STATE = PRIMARY_STATE[0].split(':')
-SECONDARY_STATE = PRIMARY_STATE[0].split(':')
+    
+print PRIMARY_STATE(0)    
 
 if PRIMARY_STATE[1] == "9" and SECONDARY_STATE[1] == "10":
     active_nodes = "2"
