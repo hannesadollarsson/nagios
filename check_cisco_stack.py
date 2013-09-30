@@ -15,29 +15,29 @@ VERSION = args.version
 COMMUNITY = args.community
 
 STACK_TABLE_OID = "1.3.6.1.4.1.9.9.500.1.2.1.1.1"
-STACK_STATE_OID = "1.3.6.1.4.1.9.9.500.1.2.1.1.1"
+STACK_STATE_OID = "1.3.6.1.4.1.9.9.500.1.2.1.1.6"
 STACK_RING_OID  = "1.3.6.1.4.1.9.9.500.1.1.3.0"
 
 def get_snmpv3(HOST, USN, AUTHPROT, AUTHPASS, PRIVPROT, PRIVPASS, AUTHLEV, OID):
-    cli_cmd = "/usr/bin/snmpwalk -v 3" + " -a " + AUTHPROT + " -A " + AUTHPASS + " -x " + PRIVPROT + " -X " + PRIVPASS + " -u " + USN + " -l " + AUTHLEV + " " + HOST + OID
+    cli_cmd = "/usr/bin/snmpwalk -v 3" + " -a " + AUTHPROT + " -A " + AUTHPASS + " -x " + PRIVPROT + " -X " + PRIVPASS + " -u " + USN + " -l " + AUTHLEV + " " + HOST + " " + OID
     process = subprocess.Popen(cli_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     output = process.communicate()
     return output
 
 def get_snmpv3(HOST, USN, AUTHPROT, AUTHPASS, PRIVPROT, PRIVPASS, AUTHLEV, OID):
-    cli_cmd = "/usr/bin/snmpwalk -v 3" + " -a " + AUTHPROT + " -A " + AUTHPASS + " -x " + PRIVPROT + " -X " + PRIVPASS + " -u " + USN + " -l " + AUTHLEV + " " + HOST + OID
+    cli_cmd = "/usr/bin/snmpwalk -v 3" + " -a " + AUTHPROT + " -A " + AUTHPASS + " -x " + PRIVPROT + " -X " + PRIVPASS + " -u " + USN + " -l " + AUTHLEV + " " + HOST + " " + OID
     process = subprocess.Popen(cli_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     output = process.communicate()
     return output
 
 def get_snmp(HOST, VERSION, COMMUNITY, OID):
-    cli_cmd = "/usr/bin/snmpwalk -v " + VERSION + " -c " + COMMUNITY + " " + HOST + OID
+    cli_cmd = "/usr/bin/snmpwalk -v " + VERSION + " -c " + COMMUNITY + " " + HOST + " " + OID
     process = subprocess.Popen(cli_cmd, stdout=subprocess.PIPE,stderr=subprocess.PIPE, shell=True)
     output = process.communicate()
     return output
 
 def get_snmp(HOST, VERSION, COMMUNITY, OID):
-    cli_cmd = "/usr/bin/snmpwalk -v " + VERSION + " -c " + COMMUNITY + " " + HOST + OID
+    cli_cmd = "/usr/bin/snmpwalk -v " + VERSION + " -c " + COMMUNITY + " " + HOST + " " + OID
     process = subprocess.Popen(cli_cmd, stdout=subprocess.PIPE,stderr=subprocess.PIPE, shell=True)
     output = process.communicate()
     return output
@@ -62,6 +62,6 @@ elif VERSION == "2" or VERSION == "1":
 else:
 	 sys.exit("Invalid version, use 1, 2 or 3")
 
-print type(STACK_TABLE)
-print type(STACK_STATE)
-print type(STACK_RING)
+print STACK_TABLE[0]
+print STACK_STATE[0]
+print STACK_RING[0]
