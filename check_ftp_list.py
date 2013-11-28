@@ -54,6 +54,7 @@ if FILE:
         print "WARNING - file does not exist"
         ftp.quit()
         sys.exit(1)
-
-# close connection
-ftp.quit()
+else:
+    print "OK - ftp service operational"
+    ftp.quit()
+    sys.exit(0)
