@@ -25,7 +25,6 @@ HSRP_STANDBY = "5"
 
 def get_state_snmpv3(HOST, USN, AUTHPROT, AUTHPASS, PRIVPROT, PRIVPASS, AUTHLEV):
     cli_cmd = "/usr/bin/snmpwalk -v 3" + " -a " + AUTHPROT + " -A " + AUTHPASS + " -x " + PRIVPROT + " -X " + PRIVPASS + " -u " + USN + " -l " + AUTHLEV + " " + HOST + " " + HSRP_OP
-    print cli_cmd
     process = subprocess.Popen(cli_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     output = process.communicate()
     return output
@@ -54,6 +53,8 @@ else:
 
 # We only need the integer status    
 HSRP_STATE = str(HSRP_STATE[0])    
+HSRP_STATE = HSRP_STATE.split()
+HSRP_STATE = HSRP_STATE[3]
 
 # specifics checks
 if STATE == "active":
