@@ -68,7 +68,7 @@ if STATE == "active":
         print "CRITICAL - Primary node not in an operational state"
         sys.exit(2)
 
-elif STATE is "standby":
+elif STATE == "standby":
     if HSRP_STATE is HSRP_STANDBY:
         print "OK - Secondary node is standby"
         sys.exit(0)
